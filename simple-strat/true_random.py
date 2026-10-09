@@ -30,14 +30,21 @@ class SimplePlayer(Player):
             elif action['type'] =='DISCARD':
                 left = action['count']
                 discarding : dict[Resource, int] = {}
+                res_copy = my_resources.copy()
+                print(res_copy)
+                print(thaw(action))
                 while left>0:
-                    rand_res = choice(list(my_resources.keys()))
-                    num_discarding = min(randint(1, my_resources[rand_res]), left)
-                    
-                    discarding[rand_res] = num_discarding
+                    rand_res = choice(list(res_copy.keys()))
+                    num_discarding = min(randint(1, res_copy[rand_res]), left)
+                    res_copy[rand_res]-=num_discarding
+
+                    if rand_res in discarding:
+                        discarding[rand_res] += num_discarding
+                    else:
+                        discarding[rand_res] = num_discarding
 
                     left -=num_discarding
-                return {'type': 'DISCARD', resources: discarding}
+                return {'type': 'DISCARD', 'resources': discarding}
 
         rand_option = choice(options)
         
