@@ -35,7 +35,7 @@ class SimplePlayer(Player):
                 print(thaw(action))
                 while left>0:
                     rand_res = choice(list(res_copy.keys()))
-                    num_discarding = min(randint(1, res_copy[rand_res]), left)
+                    num_discarding = min(randint(1, res_copy[rand_res]) if res_copy[rand_res]>0 else 0, left)
                     res_copy[rand_res]-=num_discarding
 
                     if rand_res in discarding:
