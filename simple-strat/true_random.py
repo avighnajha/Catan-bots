@@ -4,7 +4,7 @@ from src.player import *
 
 
 
-class SimplePlayer(Player):
+class TrueRandom(Player):
     def choose_action(self, view: PlayerView, options: Sequence[ActionOption]) -> ActionOption:
         resources = ["WOOD", "BRICK", "SHEEP", "WHEAT", "ORE"]
         options = list(options)
@@ -31,8 +31,8 @@ class SimplePlayer(Player):
                 left = action['count']
                 discarding : dict[Resource, int] = {}
                 res_copy = my_resources.copy()
-                print(res_copy)
-                print(thaw(action))
+                # print(res_copy)
+                # print(thaw(action))
                 while left>0:
                     rand_res = choice(list(res_copy.keys()))
                     num_discarding = min(randint(1, res_copy[rand_res]) if res_copy[rand_res]>0 else 0, left)
